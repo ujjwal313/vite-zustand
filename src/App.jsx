@@ -1,9 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import reactLogo from "./assets/react.svg";
+import { useStore } from "./store";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { count, name, inc, dec, changeName } = useStore();
+
+  const handleNameClick = (e) => {
+    changeName(e.target.value);
+  };
 
   return (
     <div className="App">
@@ -17,18 +21,17 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <button onClick={() => inc()}>Increment</button>
+        <button onClick={() => dec()}>Decrement</button>
+        <p>Count is {count}</p>
+        <input onChange={(e) => handleNameClick(e)} />
+        <p>Name is {name}</p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
