@@ -13,12 +13,8 @@ function App() {
     console.log("changed")
   );
 
-  unsub2();
-
   useEffect(() => {
     console.log("paw", paw);
-    console.log("snout", snout);
-    console.log("fur", fur);
   }, [paw]);
 
   const handleNameClick = (e) => {
