@@ -1,5 +1,5 @@
 import create from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, subscribeWithSelector } from "zustand/middleware";
 
 export const useStore = create(
   persist(
@@ -14,4 +14,8 @@ export const useStore = create(
       name: "counter",
     }
   )
+);
+
+export const useDogStore = create(
+  subscribeWithSelector(() => ({ paw: true, snout: true, fur: true }))
 );

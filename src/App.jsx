@@ -1,9 +1,25 @@
 import reactLogo from "./assets/react.svg";
-import { useStore } from "./store";
+import { useStore, useDogStore } from "./store";
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
   const { count, name, inc, dec, changeName } = useStore();
+
+  let { paw, snout, fur } = useDogStore();
+
+  const unsub2 = useDogStore.subscribe(
+    (state) => state.paw,
+    console.log("changed")
+  );
+
+  unsub2();
+
+  useEffect(() => {
+    console.log("paw", paw);
+    console.log("snout", snout);
+    console.log("fur", fur);
+  }, [paw]);
 
   const handleNameClick = (e) => {
     changeName(e.target.value);
@@ -23,6 +39,11 @@ function App() {
       <div className="card">
         <button onClick={() => inc()}>Increment</button>
         <button onClick={() => dec()}>Decrement</button>
+        <button
+          onClick={() => useDogStore.setState((state) => ({ paw: !state.paw }))}
+        >
+          Change Paw
+        </button>
         <p>Count is {count}</p>
         <input onChange={(e) => handleNameClick(e)} />
         <p>Name is {name}</p>
