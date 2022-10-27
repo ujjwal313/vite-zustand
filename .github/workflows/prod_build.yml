@@ -1,0 +1,25 @@
+name: Production Build
+
+on: 
+  pull_request:
+    branches: ['master']
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v3
+
+      - name: Node Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Installing Dependencies
+        run: npm i
+
+      - name: Build project
+        run: CI=false npm run build
