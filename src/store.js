@@ -4,7 +4,7 @@ import { persist, subscribeWithSelector } from "zustand/middleware";
 export const useStore = create(
   persist(
     (set) => ({
-      count: 1,
+      count: 5,
       name: "Ujjwal",
       inc: () => set((state) => ({ count: state.count + 1 })),
       dec: () => set((state) => ({ count: state.count - 1 })),
